@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Hariyali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #09040d;
+      --bg-2: #180915;
+      --bg-3: #2b0f22;
+      --bg-4: #451733;
+      --rose: #ff76ad;
+      --rose-2: #ff9cc2;
+      --rose-soft: #ffe0ec;
+      --gold: #f4d79b;
+      --text: #fffafc;
+      --muted: rgba(255,255,255,0.80);
+      --panel: rgba(255,255,255,0.08);
+      --panel-strong: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.16);
+      --shadow: 0 20px 60px rgba(0,0,0,0.36);
+      --shadow-soft: 0 10px 30px rgba(255,118,173,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,118,173,0.22), transparent 18%),
+        radial-gradient(circle at 86% 14%, rgba(255,224,236,0.10), transparent 16%),
+        radial-gradient(circle at 70% 75%, rgba(244,215,155,0.10), transparent 16%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-4));
+      position: relative;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      width: 320px;
+      height: 320px;
+      top: 4%;
+      left: -90px;
+      background: rgba(255,118,173,0.26);
+    }
+
+    .orb.two {
+      width: 340px;
+      height: 340px;
+      right: -110px;
+      bottom: 8%;
+      background: rgba(244,215,155,0.12);
+      animation-duration: 22s;
+    }
+
+    .orb.three {
+      width: 240px;
+      height: 240px;
+      top: 45%;
+      left: 55%;
+      background: rgba(255,156,194,0.10);
+      animation-duration: 20s;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(35px, 20px) scale(1.08); }
+    }
+
+    .stars, .hearts, .petals {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 10px rgba(255,255,255,0.95);
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255,118,173,0.46);
+      transform: rotate(45deg);
+      animation: heartRise linear forwards;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -9px; left: 0; }
+    .heart::after { top: 0; left: -9px; }
+
+    @keyframes heartRise {
+      0% { transform: translateY(0) rotate(45deg) scale(0.7); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translateY(-115vh) rotate(45deg) scale(1.2); opacity: 0; }
+    }
+
+    .petal {
+      position: absolute;
+      width: 16px;
+      height: 10px;
+      background: linear-gradient(135deg, rgba(255,209,224,0.85), rgba(255,118,173,0.65));
+      border-radius: 70% 0 70% 0;
+      opacity: 0.8;
+      animation: petalFall linear forwards;
+      filter: blur(0.2px);
+    }
+
+    @keyframes petalFall {
+      0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translateY(115vh) translateX(80px) rotate(340deg); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 38px 0 28px;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 1000px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      padding: 70px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: translateX(-120%);
+      animation: shine 8s infinite;
+      z-index: -1;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(120%); }
+    }
+
+    .hero-tag {
+      font-size: 0.82rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--rose-soft);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .hero-script {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(3.4rem, 9vw, 6.4rem);
+      line-height: 1;
+      margin-bottom: 16px;
+      text-shadow: 0 12px 36px rgba(255,118,173,0.18);
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.9rem, 6vw, 5.5rem);
+      line-height: 1.04;
+      max-width: 860px;
+      margin: 0 auto 20px;
+      font-weight: 600;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.95;
+      font-weight: 300;
+    }
+
+    .scroll-note {
+      margin-top: 32px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.66);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .section {
+      padding: 22px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .panel {
+      grid-column: span 6;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.4), var(--shadow-soft);
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -90px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(255,118,173,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .label {
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--rose-soft);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .title em {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .text {
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.95;
+      font-weight: 300;
+    }
+
+    .lines {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+      min-height: 100%;
+    }
+
+    .line {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.65rem;
+      line-height: 1.42;
+      color: #fff;
+    }
+
+    .line span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .divider {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.85), transparent);
+      margin: 6px 0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .timeline-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,118,173,0.22), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .timeline-item h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.55rem;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--rose-soft);
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      font-size: 1rem;
+    }
+
+    .proposal {
+      margin-top: 20px;
+      padding: 78px 24px;
+      border-radius: 38px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.13), transparent 36%),
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proposal::before {
+      content: "❤";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12rem;
+      color: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .proposal-top {
+      font-family: "Cinzel", serif;
+      font-size: 0.84rem;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--rose-soft);
+      margin-bottom: 16px;
+    }
+
+    .proposal-badge {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,118,173,0.18), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 30px rgba(255,118,173,0.18);
+      font-size: 2rem;
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .proposal h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.6rem, 5vw, 4.7rem);
+      line-height: 1.06;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .proposal p {
+      max-width: 780px;
+      margin: 0 auto 16px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.95;
+      font-weight: 300;
+    }
+
+    .question {
+      margin-top: 26px;
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(3.2rem, 7vw, 6.2rem);
+      line-height: 1.1;
+      text-shadow: 0 12px 34px rgba(255,118,173,0.18);
+    }
+
+    .buttons {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 16px 32px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: 0.32s ease;
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #ff76ad, #ff4f90);
+      color: #fff;
+      box-shadow: 0 16px 38px rgba(255,79,144,0.34);
+    }
+
+    .yes-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 20px 42px rgba(255,79,144,0.44);
+    }
+
+    .no-btn {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .no-btn:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .response {
+      display: none;
+      max-width: 780px;
+      margin: 28px auto 0;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text);
+      line-height: 1.92;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .response h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .final-note {
+      padding: 24px 0 10px;
+      text-align: center;
+      color: rgba(255,255,255,0.68);
+      font-size: 0.96rem;
+    }
+
+    .final-note span {
+      display: block;
+      margin-top: 8px;
+      font-family: "Great Vibes", cursive;
+      font-size: 2.1rem;
+      color: var(--rose-soft);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(4, 1, 6, 0.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 30;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: grid;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      width: min(520px, 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.07));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      padding: 34px 26px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,118,173,0.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, rgba(255,118,173,0.18), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 1.8rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .modal-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.1rem;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .modal-card p {
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.02rem;
+      font-weight: 300;
+    }
+
+    .modal-actions {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .modal-btn {
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-size: 0.96rem;
+    }
+
+    .modal-primary {
+      background: linear-gradient(135deg, #ff76ad, #ff4f90);
+      color: white;
+      box-shadow: 0 14px 32px rgba(255,79,144,0.3);
+    }
+
+    .modal-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    @media (max-width: 900px) {
+      .panel {
+        grid-column: span 12;
+      }
+
+      .hero-card {
+        padding: 52px 22px;
+      }
+
+      .proposal {
+        padding: 56px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="backdrop">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+    <div class="stars" id="stars"></div>
+    <div class="hearts" id="hearts"></div>
+    <div class="petals" id="petals"></div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-tag">A page from my heart to yours</div>
+        <div class="hero-script">Hariyali</div>
+        <h1>To the woman who made me feel <span>alive again</span></h1>
+        <p>
+          This is not just an apology. This is the truth I should have said sooner, the love I still carry for you,
+          and everything my heart has been trying to find the courage to tell you.
+        </p>
+        <div class="scroll-note">Read my heart</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <div class="panel">
+          <div class="label">My deepest truth</div>
+          <div class="title">I was drowning inside myself, and I hurt <em>the person I love most</em></div>
+          <div class="text">
+            What happened between us was not just a fight. I was going through one of the darkest and heaviest times of my life,
+            and instead of holding on to the one person who brought light into me, I let my pain speak in the cruelest way.
+            I broke up with you. I said things I should never have said. I turned my confusion, sadness, and inner struggle into wounds that landed on your heart.
+            <br><br>
+            For that, I am truly, deeply, and endlessly sorry. Not the kind of sorry that is said just to fix a moment,
+            but the kind that comes from real regret — the kind that sits in the chest and aches because it knows how badly it failed someone precious.
+            <br><br>
+            You did not deserve that version of me. You did not deserve the silence, the distance, or the pain. You deserved softness, honesty, patience, and love.
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="lines">
+            <div class="label">What my heart keeps saying</div>
+            <div class="line">I do not want to <span>lose you.</span></div>
+            <div class="divider"></div>
+            <div class="line">You are the best decision</div>
+            <div class="line">I have ever made in <span>my life.</span></div>
+            <div class="divider"></div>
+            <div class="line">When I am with you,</div>
+            <div class="line">I do not just smile —</div>
+            <div class="line">I feel truly <span>alive.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <div class="panel">
+          <div class="label">What you mean to me</div>
+          <div class="title">You gave meaning to my life in a way no one else ever could</div>
+          <div class="text">
+            Hariyali, you are not just someone I fell in love with. You are the person who taught me how to be myself.
+            With you, I never had to hide. I never had to pretend. Somehow, in your presence, I felt seen in the gentlest way.
+            <br><br>
+            You made my world feel warmer. You made ordinary days feel beautiful. You gave my life colour, peace, and meaning.
+            There are some people who enter your life and leave a memory. But you — you became part of my soul. You became the place in my heart that feels like home.
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="label">If I could say it with my whole soul</div>
+          <div class="title">I miss <em>you</em>, not just us</div>
+          <div class="text">
+            I miss your presence. I miss your warmth. I miss the way life feels when you are in it.
+            I miss the version of me that breathes easier around you, laughs more honestly around you, and feels less lost when you are near.
+            <br><br>
+            Since losing you, I have understood something painful but true: some people are not just important to your life — they are the reason your life feels meaningful.
+            And to me, you are that person.
+            <br><br>
+            If love means choosing one heart through all the beautiful and broken parts of life, then I choose yours. Still. Fully. Without hesitation.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel" style="grid-column: span 12;">
+        <div class="label">What I want you to know</div>
+        <div class="title">This apology comes from love, regret, and the hope of one more chance</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-icon">🤍</div>
+            <div>
+              <h3>I know I hurt you</h3>
+              <p>I am not trying to make excuses for what I said or what I did. I know my words may have broken trust, and I know pain like that cannot be erased by a single message or a beautiful page.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">🌙</div>
+            <div>
+              <h3>But none of it changed how deeply I love you</h3>
+              <p>Even in my darkest moments, my heart never stopped belonging to you. What broke us was not a lack of love. It was me losing myself for a while — and hurting you in the process.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">✨</div>
+            <div>
+              <h3>If you let me, I want to make things right</h3>
+              <p>I do not want to offer you empty promises. I want to offer you sincerity, growth, gentleness, and a love that treats your heart with the care it should have had all along.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proposal">
+      <div class="proposal-badge">💌</div>
+      <div class="proposal-top">One heart. One truth. One hope.</div>
+      <h2>More than anything, I just want the chance to make things right</h2>
+      <p>
+        Hariyali, I know sorry cannot undo the pain. I know healing cannot be rushed. And I know your heart deserves honesty, not pressure.
+      </p>
+      <p>
+        But if there is still even the smallest soft corner in your heart for me, then I want to ask you the one question that matters most to me right now.
+      </p>
+      <div class="question">Will you accept my apology?</div>
+
+      <div class="buttons">
+        <button class="yes-btn" onclick="acceptApology()">Yes ♡</button>
+        <button class="no-btn" onclick="rejectApology()">No</button>
+      </div>
+
+      <div class="response" id="responseBox"></div>
+    </section>
+
+    <div class="final-note">
+      Every word on this page was written with love
+      <span>For Hariyali, always</span>
+    </div>
+  </div>
+
+  <div class="modal" id="popupModal">
+    <div class="modal-card" id="modalCard">
+      <div class="modal-icon" id="modalIcon">💖</div>
+      <h3 id="modalTitle">FOR YOU THOUSAND TIMES, PADI</h3>
+      <p id="modalText">Thank you for opening your heart. This means more to me than words can ever explain.</p>
+      <div class="modal-actions" id="modalActions">
+        <button class="modal-btn modal-primary" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const starsContainer = document.getElementById('stars');
+    const heartsContainer = document.getElementById('hearts');
+    const petalsContainer = document.getElementById('petals');
+    const modal = document.getElementById('popupModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const modalActions = document.getElementById('modalActions');
+    const modalIcon = document.getElementById('modalIcon');
+
+    function createStars() {
+      for (let i = 0; i < 36; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        star.style.animationDuration = (2.5 + Math.random() * 3.5) + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.bottom = '-30px';
+      heart.style.animationDuration = (8 + Math.random() * 5) + 's';
+      heart.style.opacity = (0.35 + Math.random() * 0.45).toFixed(2);
+      heart.style.transform = `rotate(45deg) scale(${0.7 + Math.random() * 0.8})`;
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 13000);
+    }
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (8 + Math.random() * 6) + 's';
+      petal.style.opacity = (0.3 + Math.random() * 0.5).toFixed(2);
+      petal.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.8})`;
+      petalsContainer.appendChild(petal);
+      setTimeout(() => petal.remove(), 15000);
+    }
+
+    createStars();
+    setInterval(createHeart, 420);
+    setInterval(createPetal, 900);
+
+    function openModal(type) {
+      if (type === 'yes') {
+        modalIcon.textContent = '💖';
+        modalTitle.textContent = 'FOR YOU THOUSAND TIMES, PADI';
+        modalText.textContent = 'Thank you for opening your heart. This means more to me than words can ever explain.';
+        modalActions.innerHTML = '<button class="modal-btn modal-primary" onclick="closeModal()">Close</button>';
+      } else {
+        modalIcon.textContent = '🥺';
+        modalTitle.textContent = 'OHHHH PADA Please';
+        modalText.textContent = 'Please try again.';
+        modalActions.innerHTML = '<button class="modal-btn modal-primary" onclick="refreshPage()">Try Again</button><button class="modal-btn modal-secondary" onclick="closeModal()">Stay Here</button>';
+      }
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function refreshPage() {
+      location.reload();
+    }
+
+    function acceptApology() {
+      const box = document.getElementById('responseBox');
+      box.style.display = 'block';
+      box.innerHTML = `
+        <h3>Thank you... this means everything to me.</h3>
+        <p>
+          I know I cannot rewrite the past, but I can promise this from the deepest part of my heart:
+          I will never stop being grateful for you, and I will never stop wishing to love you more gently,
+          more honestly, and more beautifully than before.
+        </p>
+        <p>
+          You will always be one of the most precious parts of my life.
+        </p>
+      `;
+      openModal('yes');
+    }
+
+    function rejectApology() {
+      openModal('no');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
